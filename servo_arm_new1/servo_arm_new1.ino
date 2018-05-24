@@ -2,22 +2,13 @@
 
 Servo s[17];
 
-int servo1_RApin=2;
-int servo2_RApin=3;
-int servo3_RApin=4;
-
-int servo1_LApin=5;
-int servo2_LApin=6;
-int servo3_LApin=7;
-
-
 int i=0;
 
 class Servo_Motor
 {
   public:
-  int deg=0,pos,dir=0;
-  void move_Motor(int deg,int pos,int dir,int servo_obj);               //number contains which servo to move
+  int deg,pos,dir=0;
+  void move_Motor(int deg,int pos,int dir,int servo_obj,int motor_num);               //number contains which servo to move
   int update_pos(int curr_pos,int final_pos);     //curr_pos  will contain the pos of current passing object
 }m[12];
 
@@ -31,6 +22,11 @@ void setup()
   s[k].attach(l);
   l++;
   }
+
+  for(int k=2;k<14;k++)
+  s[k].write(0);
+
+  delay(200);
 
 }
 
@@ -47,9 +43,11 @@ void loop()
 switch(check)
 {
   case 'A':
-  m[0].move_Motor(60,m[0].pos,1,2);
+  m[0].move_Motor(60,m[0].pos,1,2,0);
+  break;
   case 'B':
-  m[1].move_Motor(60,m[1].pos,1,3);
+  m[1].move_Motor(60,m[1].pos,1,3,1);
+  break;
 /*  case 'C':
   m3_RA.move_Motor(60,m3_RA.pos,1);*/
   
@@ -61,7 +59,7 @@ switch(check)
  }
 
 
- void Servo_Motor::move_Motor(int deg,int pos,int dir,int servo_obj)       //servo_num contains the servo object
+ void Servo_Motor::move_Motor(int deg,int pos,int dir,int servo_obj,int motor_num)       //servo_num contains the servo object
 
 {Serial.println(dir);
 
@@ -69,19 +67,21 @@ switch(check)
   {
     Serial.println("Executing cond ");
     Serial.print("Val of pos  ");
-    Serial.println(pos);
-    if(pos<179)
+    Serial.println(m[motor_num].pos);
+    if(m[motor_num].pos<179)
       {
-        int a=update_pos(pos,deg);
-        for(i=pos;   i<a;  i++){
+        int a=update_pos(m[motor_num].pos,deg);
+        Serial.print("Val of a      :");
+        Serial.println(a);
+        for(i=m[motor_num].pos;   i<a;  i++){
           s[servo_obj].write(i);
           delay(10);
           }
-        pos=a;
+       m[motor_num].pos=a;
         Serial.print("Val of pos                 :");
-        Serial.println(pos);
+        Serial.println(m[motor_num].pos);
        }
-       i=0;
+       
     
     }
   
