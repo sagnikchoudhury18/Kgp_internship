@@ -7,6 +7,7 @@ img1=cv2.imread('E:/kgp_internship/opencv_material/images/standard_test_images/b
 
 blur=cv2.blur(img1,(3,3))
 
+#cv2.imshow('blur',blur)
 edges1=cv2.Canny(blur,100,200)
 height1,width1=edges1.shape
 print(height1,width1)
@@ -39,7 +40,7 @@ count=0
 while count<2000:
     flag=0
     count+=1
-    if((count>10)and(i==i1)and(j==j1)):
+    if((count>50)and(i==i1)and(j==j1)):
         print("Break")
         break
     if(edges1[i-1,j-1]==255) and [i-1,j-1] not in(points):
@@ -86,44 +87,95 @@ while count<2000:
         j=j+1
         flag=1
         print("Eigth if")
-    '''while(flag==0):
+    while(flag==0):
         print("No point found")
-        if(edges1[i-2,j+2]==255):
+        if(edges1[i-2,j+2]==255)and [i-2,j+2] not in(points):
             i=i-2
             j=j+2
             flag=1
+            print("flag 0 first if")
             break
-        elif(edges1[i,j+2]==255):
-            j+=3
+        elif(edges1[i,j+2]==255)and [i,j+2] not in (points):
+            j+=2
             flag=1
+            print("flag 0 second if")
             break
-        elif(edges1[i+2,j+2]==255):
+        elif(edges1[i+2,j+2]==255)and [i+2,j+2] not in (points):
             i+=2
             j+=2
             flag=1
+            print("flag 0 third if")
             break
-        elif(edges1[i+2,j]==255):
+        elif(edges1[i+2,j]==255)and [i+2,j] not in (points):
             i+=2
             flag=1
+            print("flag 0 fourth if")
             break
-        elif(edges1[i+2,j-2]==255):
+        elif(edges1[i+2,j-2]==255)and [i+2,j-2] not in (points):
             i+=2
             j-=2
             flag=1
+            print("flag 0 fifth if")
             break
-        elif(edges1[i,j-2]==255):
+        elif(edges1[i,j-2]==255) and [i,j-2] not in (points):
             j-=2
             flag=1
+            print("flag 0 sixth if")
             break
-        elif(edges1[i-2,j-2]==255):
+        elif(edges1[i-2,j-2]==255) and [i-2,j-2] not in (points):
             i-=2
             j-=2
             flag=1
+            print("flag 0 seveth if")
             break
-        elif(edges1[i-2,j]==255):
+        elif(edges1[i-2,j]==255) and [i-2,j] not in (points):
             i-=2
             flag=1
-            break'''
+            print("flag 0 eigth if")
+            break
+        elif(edges1[i-3,j+3]==255)and [i-3,j+3] not in (points):
+            i=i-3
+            j=j+3
+            flag=1
+            print("flag 0 ninth if")
+            break
+        elif(edges1[i,j+3]==255)and [i,j+3] not in (points):
+            j+=3
+            flag=1
+            break
+        elif(edges1[i+3,j+3]==255)and [i+3,j+3] not in (points):
+            i+=3
+            j+=3
+            flag=1
+            print("flag 0 tenth if")
+            break
+        elif(edges1[i+3,j]==255)and [i+3,j] not in (points):
+            i+=3
+            flag=1
+            break
+        elif(edges1[i+3,j-3]==255)and [i+3,j-3] not in (points):
+            i+=3
+            j-=3
+            flag=1
+            print("flag 0 eleventh if")
+            break
+        elif(edges1[i,j-3]==255) and [i,j-3] not in (points):
+            j-=3
+            flag=1
+            print("flag 0 twelvth if")
+            break
+        elif(edges1[i-3,j-3]==255)and [i-3,j-3] not in (points):
+            i-=3
+            j-=3
+            flag=1
+            print("flag 0 thirteenth if")
+            break
+        elif(edges1[i-3,j]==255)and [i-3,j] not in (points):
+            i-=3
+            flag=1
+            print("flag 0 fourteenth if")
+            break
+        
         
     #print(str(i)+" "+str(j))
     #cv2.imshow('op',op)      
@@ -132,5 +184,4 @@ while count<2000:
 print(points)
 cv2.imshow('op',op)    
     
-
 
